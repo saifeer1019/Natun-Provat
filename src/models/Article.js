@@ -9,6 +9,10 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    excerpt: {
+        type: String,
+        required: true
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

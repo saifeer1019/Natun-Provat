@@ -22,8 +22,9 @@ const GridWithFeaturedLayout = ({ category, articles }) => (
           />
           <h3 className="text-2xl font-bold hover:text-blue-600">{articles[0].title}</h3>
           <div className="flex items-center mt-4 text-gray-500 text-sm">
-            <Clock className="w-4 h-4 mr-2" />
-            <span>{articles[0].time}</span>
+          <Clock className="w-4 h-4 mr-2" />
+          <time className="text-sm text-gray-500 mt-1 ">{new Date(articles[0].publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
+             
           </div>
         </article>
       </Link>
@@ -60,7 +61,7 @@ const MagazineLayout = ({ category, articles }) => (
       <div className="space-y-8">
         {articles.slice(0, 3).map((article, index) => (
           <Link href={`/article/${article._id}`} key={index} className="border-b border-gray-200 pb-8 cursor-pointer last:border-0">
-            <span className="text-sm text-blue-600 mb-2 block">{article.subcategory}</span>
+            <span className="text-sm text-blue-600 mb-2 block">{article.category}</span>
             <h3 className="text-xl font-bold hover:text-blue-600 mb-2">{article.title}</h3>
           
             <time className="text-sm text-gray-500 mt-4 block">{new Date(article.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
@@ -169,7 +170,7 @@ const EditorsPicksCarousel = ({ articles }) => {
                     <time className="text-sm text-gray-500">
                       {new Date(article.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </time>
-                    <span className="text-sm font-medium">By {article.editor}</span>
+                  {  /*<span className="text-sm font-medium">By {article.editor}</span>*/}
                   </div>
                 </div>
               </article>

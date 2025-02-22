@@ -137,12 +137,10 @@ console.log(articles)
                   <img 
                     src={articles.featuredNews[0].featuredImage} 
                     alt={articles.featuredNews[0].title}
-                    className="w-full h-96 object-cover rounded-lg"
+                    className="w-full h-[58vh] object-cover rounded-lg"
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
-                    <span className="text-sm font-medium text-blue-400">
-                      {articles.featuredNews[0].category}
-                    </span>
+                   
                     <h2 className="text-2xl font-bold text-white mt-2">
                       {articles.featuredNews[0].title}
                     </h2>
@@ -150,7 +148,10 @@ console.log(articles)
                     <div className="flex items-center mt-4 text-gray-300 text-sm">
                       <Clock className="w-4 h-4 mr-2" />
                       <span>{new Date(articles.featuredNews[0].publishDate).toLocaleDateString()}</span>
-                    </div>
+                      <span className="text-sm font-medium text-blue-400 mx-4">
+                      {articles.featuredNews[0].category}
+                    </span>
+                      </div>
                   </div>
                 </article>
               </div>
@@ -165,16 +166,19 @@ console.log(articles)
                       className="w-full h-48 object-cover rounded-lg"
                     />
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
-                      <span className="text-xs font-medium text-blue-400">
-                        {article.category}
-                      </span>
-                      <h3 className="text-lg font-bold text-white mt-1">
+                    
+                      <h3 className="text-sm font-bold text-white mt-1">
                         {article.title}
                       </h3>
                       <div className="flex items-center mt-2 text-gray-300 text-xs">
                         <Clock className="w-3 h-3 mr-1" />
                         <span>{new Date(article.publishDate).toLocaleDateString()}</span>
+                        <span className="text-xs font-medium text-blue-400 mx-4">
+                      {article.category}
+                    </span>
                       </div>
+                      
+                      
                     </div>
                   </article>
                 ))}
@@ -196,7 +200,7 @@ console.log(articles)
                   <h3 className="text-base font-semibold group-hover:text-blue-600 mb-1">
                     {news.title}
                   </h3>
-                  <time className="text-sm text-gray-500">{news.publishDate}</time>
+                 {/* <time className="text-sm text-gray-500">{news.publishDate}</time>*/}
                     <div className="flex items-center mt-1 text-gray-500 text-xs">
                     <Clock className="w-3 h-3 mr-1" />
                     <span>{new Date(news.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>

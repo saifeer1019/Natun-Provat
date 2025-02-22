@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/material": "^6.4.3",
     "axios": "^1.7.9",
     "lucide-react": "^0.474.0",
     "mongoose": "^8.9.5",
     "next": "15.1.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-mui-sidebar": "^1.5.9",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

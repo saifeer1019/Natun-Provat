@@ -4,6 +4,8 @@ export default function Footer() {
         <div className="container mx-auto px-4 text-center">
           <p>© 2023 Rajshahi News. All rights reserved.</p>
           <p className="mt-2">Contact: info@rajshahinews.com</p>
+
+          <a href='admin.natunprovat.com'>Admin </a>
         </div>
       </footer>
     )
