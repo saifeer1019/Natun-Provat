@@ -5,7 +5,7 @@ export default function Footer() {
           <p>© 2023 Rajshahi News. All rights reserved.</p>
           <p className="mt-2">Contact: info@rajshahinews.com</p>
 
-          <a href='admin.natunprovat.com'>Admin </a>
+          <a href='https://admin.natunprovat.com'>Admin </a>
         </div>
       </footer>
     )
