@@ -3,7 +3,18 @@ import React, { useState } from 'react';
 import { ChevronRight, ChevronLeft, Clock, Trophy } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import VideoPreview from '../VideoPreview';
 
+  const isVideoFile = (url) => {
+  if (!url) return false;
+  const videoExtensions = ['.mp4', '.webm', '.ogg', '.avi', '.mov', '.wmv', '.flv', '.mkv'];
+  const lowerUrl = url.toLowerCase();
+  return videoExtensions.some(ext => lowerUrl.includes(ext)) || 
+         lowerUrl.includes('video') || 
+         lowerUrl.includes('.mp4') ||
+         lowerUrl.includes('youtube') ||
+         lowerUrl.includes('vimeo');
+};
 // Layout 1: Grid Layout with Featured Article
 const GridWithFeaturedLayout = ({ category, articles }) => (
   <section className="mb-12 contain">
@@ -16,11 +27,20 @@ const GridWithFeaturedLayout = ({ category, articles }) => (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
       <Link href={`/article/${articles[0]._id}`} className="lg:col-span-2 cursor-pointer">
         <article>
-          <img 
-            src={articles[0].featuredImage} 
-            alt={articles[0].title}
-            className="w-[100%] h-24 md:h-64 object-cover rounded-md mb-4"
-          />
+            {!isVideoFile(articles[0].featuredImage) ? (
+             <Image
+                  src={articles[0].thumbnailImage || articles[0].featuredImage}
+                  alt={articles[0].title}
+                  width={800}
+                  height={800}
+                  className="w-[100%] h-24 md:h-64 object-cover rounded-md mb-4" />
+            ):
+           <div className='w-[100%] h-24 md:h-64 object-cover rounded-md mb-4'>
+          <VideoPreview url={articles[0].featuredImage} />
+        
+        </div>
+          
+          }
           <h3 className="text:lg md:text-2xl font-bold hover:text-blue-600">{articles[0].title}</h3>
           <p className="text-gray-600 mt-2">{articles[0].excerpt}</p>
           <div className="flex items-center mt-4 text-gray-500 text-sm">
@@ -33,11 +53,20 @@ const GridWithFeaturedLayout = ({ category, articles }) => (
         {articles.slice(1, 5).map((article, index) => (
           <Link href={`/article/${article._id}`} key={index} className="block">
             <article className="cursor-pointer flex gap-4 items-center ">
-              <img 
-                src={article.featuredImage} 
-                alt={article.title}
-                className="w-28 md:w-36 h-20 object-cover rounded-md flex-shrink-0"
-              />
+               {!isVideoFile(article.featuredImage) ? (
+             <Image
+                  src={article.thumbnailImage || article.featuredImage}
+                  alt={article.title}
+                  width={100}
+                  height={50}
+                  className="w-28 md:w-36 h-20  object-cover rounded-md flex-shrink-0" />
+            ):
+           <div className='w-28 md:w-36 h-20  object-cover rounded-md flex-shrink-0'>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
+          
+          }
               <div>
                 <h4 className="font-semibold hover:text-blue-600">{article.title}</h4>
                 <p className="text-gray-600 text-sm mt-1">{article.description}</p>
@@ -52,11 +81,20 @@ const GridWithFeaturedLayout = ({ category, articles }) => (
       {articles.slice(5, 9).map((article, index) => (
         <Link href={`/article/${article._id}`} key={index} className="block -300 pb-2">
           <article className="cursor-pointer flex gap-4 items-center ">
-            <img 
-              src={article.featuredImage} 
-              alt={article.title}
-              className="w-28 md:w-36 h-20  object-cover rounded-md flex-shrink-0"
-            />
+             {!isVideoFile(article.featuredImage) ? (
+             <Image
+                  src={article.thumbnailImage || article.featuredImage}
+                  alt={article.title}
+                  width={100}
+                  height={50}
+                  className="w-28 md:w-36 h-20  object-cover rounded-md flex-shrink-0" />
+            ):
+           <div className='w-28 md:w-36 h-20  object-cover rounded-md flex-shrink-0'>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
+          
+          }
             <div>
               <h4 className="font-semibold hover:text-blue-600">{article.title}</h4>
               <p className="text-gray-600 text-sm mt-1">{article.description}</p>
@@ -115,13 +153,20 @@ const EditorsPicksCarousel = ({ articles }) => {
             <Link href={`/article/${article._id}`} key={index} className=" card-border ">
               <article className="w-[40vw] md:w-[20vw] h-full overflow-visible ">
               <div className="h-[60%] overflow-hidden">
-              <Image 
-                src={article.featuredImage} 
-                alt={article.title}
-                width={100}
-                height={50}
-                className="w-full h-full object-cover"
-              />
+             {!isVideoFile(article.featuredImage) ? (
+             <Image
+                  src={article.thumbnailImage || article.featuredImage}
+                  alt={article.title}
+                  width={100}
+                  height={50}
+                  className="object-cover w-full h-full" />
+            ):
+           <div className='object-cover w-full h-full'>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
+          
+          }
             </div>
                 <div className="h-[40%] p-2 flex flex-col justify-between ">
            
@@ -138,34 +183,81 @@ const EditorsPicksCarousel = ({ articles }) => {
   );
 };
 // Layout 2: Magazine Style Layout
+
 const MagazineLayout = ({ category, articles }) => (
   <section className="mb-12">
+    {/* Header */}
     <div className="flex items-center justify-between mb-6 custom-gradient p-2 rounded-md text-white">
       <h2 className="text-2xl font-bold">{category}</h2>
-      <button className="flex items-center  hover:text-blue-700">
-      আরও দেখুন <ChevronRight className="w-4 h-4 ml-1" />
+      <button className="flex items-center hover:text-blue-200 transition">
+        আরও দেখুন <ChevronRight className="w-4 h-4 ml-1" />
       </button>
     </div>
+
+    {/* Content Grid */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="space-y-8">
+      
+      {/* Left Column - Latest Articles */}
+      <div className="space-y-0">
         {articles.slice(0, 3).map((article, index) => (
-          <Link href={`/article/${article._id}`} key={index} className="border-b border-gray-200 pb-8 cursor-pointer last:border-0">
-            <span className="text-sm text-blue-600 mb-2 block">{article.category}</span>
-            <h3 className="text-xl font-bold hover:text-blue-600 mb-2">{article.title}</h3>
+          <Link
+            href={`/article/${article._id}`}
+            key={index}
+            className="border-b flex justify-start gap-2 border-gray-200 pb-8 cursor-pointer last:border-0 "
+          >
+            {/* Conditional Image */}
+            {!isVideoFile(article.featuredImage) ? (
+              <div className="relative w-full md:w-52 aspect-video rounded-md overflow-hidden ">
+                <Image
+                  src={article.thumbnailImage || article.featuredImage}
+                  alt={article.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ):
+           <div className='w-full md:w-52  aspect-video  '>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
           
-            <time className="text-sm text-gray-500 mt-4 block">{new Date(article.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
+          }
+
+           <div> <span className="text-sm text-blue-600 mb-2 block">{article.category}</span>
+            <h3 className="text-xl font-bold hover:text-blue-600 mb-2">{article.title}</h3>
+            <time className="text-sm text-gray-500 block">
+              {new Date(article.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </time>
+            </div>
           </Link>
         ))}
       </div>
-      <div className="bg-gray-50 p-6 rounded-lg">
-        <h3 className="text-lg font-semibold mb-6">{category}: সর্বোচ্চ পাঠিত</h3>
+
+      {/* Right Column - Most Read */}
+      <div className="bg-gray-50  rounded-lg">
+        <h3 className="text-lg font-semibold mb-6">সর্বোচ্চ পাঠিত</h3>
         <div className="space-y-6">
-          {articles.slice(3, 7).map((article, index) => (
-            <Link href={`/article/${article._id}`} key={index} className="flex cursor-pointer items-start gap-4 ">
-              <span className="text-2xl font-bold text-gray-300">0{index + 1}</span>
+          {articles.slice(3, 8).map((article, index) => (
+            <Link
+              href={`/article/${article._id}`}
+              key={index}
+              className="flex items-start gap-4 cursor-pointer"
+            >
+              {!isVideoFile(article.featuredImage) && (
+                <div className="relative min-w-[96px] h-[54px] aspect-video rounded-md overflow-hidden">
+                  <Image
+                    src={article.thumbnailImage || article.featuredImage}
+                    alt={article.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <div>
                 <h4 className="font-semibold hover:text-blue-600">{article.title}</h4>
-                <time className="text-sm text-gray-500 mt-1 block">{new Date(article.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</time>
+                <time className="text-sm text-gray-500 mt-1 block">
+                  {new Date(article.publishDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </time>
               </div>
             </Link>
           ))}
@@ -174,6 +266,8 @@ const MagazineLayout = ({ category, articles }) => (
     </div>
   </section>
 );
+
+export default MagazineLayout;
 
 // Layout 3: Cards Layout
 const CardsLayout = ({ category, articles }) => (
@@ -187,11 +281,20 @@ const CardsLayout = ({ category, articles }) => (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {articles.slice(0, 8).map((article, index) => (
         <Link href={`/article/${article._id}`} key={index} className="cursor-pointer bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-          <img 
-            src={article.featuredImage} 
-            alt={article.title}
-            className="w-full h-48 object-cover"
-          />
+                 {!isVideoFile(article.featuredImage) ? (
+             <Image
+                  src={article.thumbnailImage || article.featuredImage}
+                  alt={article.title}
+                  width={800}
+                  height={800}
+                  className="object-cover w-full h-48" />
+            ):
+           <div className='object-cover w-full h-48'>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
+          
+          }
           <div className="p-4">
             <span className="text-sm text-blue-600 mb-2 block">{article.subcategory}</span>
             <h3 className="font-bold hover:text-blue-600">{article.title}</h3>

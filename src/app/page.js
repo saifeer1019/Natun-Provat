@@ -7,11 +7,23 @@ import { useRouter } from 'next/navigation';
 import { useState,  useEffect } from 'react';
 import MainContent from '@/components/homepgae/MainContent';
 import BreakingNews from '@/components/BreakingNews';
+import VideoPreview from '@/components/VideoPreview';
 
 const NewsHomepage = () => {
   const [articles, setArticles] = useState()
   const router = useRouter()
 
+  
+  const isVideoFile = (url) => {
+  if (!url) return false;
+  const videoExtensions = ['.mp4', '.webm', '.ogg', '.avi', '.mov', '.wmv', '.flv', '.mkv'];
+  const lowerUrl = url.toLowerCase();
+  return videoExtensions.some(ext => lowerUrl.includes(ext)) || 
+         lowerUrl.includes('video') || 
+         lowerUrl.includes('.mp4') ||
+         lowerUrl.includes('youtube') ||
+         lowerUrl.includes('vimeo');
+};
   useEffect(() => {
     const fetchArticles = async () => {
       let response = await axios.get('/api/articles');
@@ -61,13 +73,18 @@ const toBanglaNumber = (num) => {
                <article 
                  key={index}
                  onClick={() => router.push(`/article/${article._id}`)}
-                 className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded-md"
+                 className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded-md hover:text-blue-500"
                >
-                 <img 
-                   src={article.featuredImage} 
-                   alt={article.title}
-                   className="w-20 h-16 object-cover rounded-md mr-4"
-                 />
+                   {  !isVideoFile(article.featuredImage)?  <img 
+                src={article.thumbnailImage || article.featuredImage} 
+                alt={article.title}
+                className="w-20 h-16 object-cover rounded-md mr-4"
+              />: (
+          <div className='w-20 h-16 object-cover rounded-md mr-4'>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
+      )}
                  <h3 className="font-semibold  line-clamp-2">{article.title}</h3>
                </article>
              ))}
@@ -86,7 +103,7 @@ const toBanglaNumber = (num) => {
                <article 
                  key={index} 
                  onClick={() => router.push(`/article/${news._id}`)}
-                 className="flex items-center space-x-4 py-3 border-b border-gray-100 last:border-b-0 cursor-pointer hover:bg-gray-50"
+                 className="flex items-center space-x-4 py-3 border-b border-gray-100 last:border-b-0 cursor-pointer hover:bg-gray-50 hover:text-blue-500"
                >
                  <span className="rounded-full bg-zinc-400 text-white px-3 py-1">
                    {toBanglaNumber(index + 1)}
@@ -103,7 +120,7 @@ const toBanglaNumber = (num) => {
 
 {/*I just need it fixed till here the rest is okay */}
 
-              <div>
+              <div className='flex flex-col gap-6 mt-6'>
               {/* Editor's Picks Carousel */}
               <EditorsPicksCarousel articles={articles.বাংলাদেশ} />
            
@@ -128,5 +145,21 @@ const toBanglaNumber = (num) => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default NewsHomepage;

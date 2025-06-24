@@ -83,7 +83,7 @@ const ArticlePage = async ({ params }) => {
   let article = await Article.findOne({'_id': id}).populate(('author'))
   let relatedArticles = await Article.find({'category': article.category}).sort({'createdAt': -1})
      .limit(Number(6)).populate(('author'))
-  console.log(relatedArticles)
+
          
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

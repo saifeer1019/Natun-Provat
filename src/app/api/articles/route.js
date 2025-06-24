@@ -39,8 +39,9 @@ export async function GET() {
       }
 
       const রাজশাহী = await getCategories('রাজশাহী', 10);
+      console.log(রাজশাহী)
       const বিনোদন = await getCategories('বিনোদন', 4);
-      const খেলাধুলা = await getCategories('খেলাধুলা', 8);
+      const খেলাধুলা = await getCategories('খেলাধুলা', 9);
       const বিশ্ব = await getCategories('বিশ্ব', 8);
       const বাংলাদেশ = await getCategories('বাংলাদেশ', 8);
 

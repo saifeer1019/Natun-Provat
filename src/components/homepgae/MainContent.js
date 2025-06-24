@@ -1,8 +1,22 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
+import VideoPreview from '../VideoPreview';
+import Image from 'next/image';
 
 const MainContent = ({articles}) => {
   const router = useRouter();
+
+
+  const isVideoFile = (url) => {
+  if (!url) return false;
+  const videoExtensions = ['.mp4', '.webm', '.ogg', '.avi', '.mov', '.wmv', '.flv', '.mkv'];
+  const lowerUrl = url.toLowerCase();
+  return videoExtensions.some(ext => lowerUrl.includes(ext)) || 
+         lowerUrl.includes('video') || 
+         lowerUrl.includes('.mp4') ||
+         lowerUrl.includes('youtube') ||
+         lowerUrl.includes('vimeo');
+};
 
   return (
     <div className="space-y-6 p-2 ">
@@ -11,18 +25,30 @@ const MainContent = ({articles}) => {
         {/* Main Featured Article */}
         <article 
           onClick={() => router.push(`/article/${articles[0]._id}`)}
-          className="flex flex-col md:flex-row gap-6 cursor-pointer hover:opacity-90 transition-opacity"
+          className="flex flex-col md:flex-row gap-6 cursor-pointer hover:opacity-90 transition-opacity group hover:text-blue-500"
         >
-          <img 
-            src={articles[0].featuredImage} 
-            alt={articles[0].title}
-            className="w-full md:w-1/2 aspect-video  object-cover rounded-md"
-          />
+        
+        
+        { !isVideoFile(articles[0].featuredImage)? <div className="relative w-full md:w-1/2 aspect-video rounded-md overflow-hidden">
+ 
+          <Image
+    src={articles[0].thumbnailImage || articles[0].featuredImage}
+    alt={articles[0].title}
+    fill
+    className="object-cover"
+  />
+</div>
+        : (
+          <div className='w-full md:w-1/2 aspect-video  '>
+          <VideoPreview url={articles[0].featuredImage} />
+        
+        </div>
+      )}
           <div className="w-full md:w-1/2 space-y-4">
             <h2 className="text-2xl md:text-3xl font-bold">
               {articles[0].title}
             </h2>
-            <p className="text-gray-600 text-base leading-relaxed line-clamp-5">
+            <p className="text-gray-600  text-base leading-relaxed line-clamp-5">
               {articles[0].excerpt}
             </p>
           </div>
@@ -34,13 +60,18 @@ const MainContent = ({articles}) => {
             <article 
               key={index} 
               onClick={() => router.push(`/article/${article._id}`)}
-              className="group cursor-pointer hover:opacity-90 transition-opacity"
+              className="group cursor-pointer hover:opacity-90 transition-opacity hover:text-blue-500"
             >
-              <img 
-                src={article.featuredImage} 
+            {  !isVideoFile(article.featuredImage)?  <img 
+                src={article.thumbnailImage || article.featuredImage} 
                 alt={article.title}
-                className="w-full aspect-video object-cover rounded-md"
-              />
+                className="w-full aspect-video "
+              />: (
+          <div className='w-full aspect-video  '>
+          <VideoPreview url={article.featuredImage} />
+        
+        </div>
+      )}
               <h3 className="font-semibold mt-2 line-clamp-2 text-sm md:text-base">
                 {article.title}
               </h3>

@@ -51,7 +51,7 @@ const ArticlePage = async ({ searchParams }) => {
                     articles.map((article, index) => (
                         <Link href={`/article/${article._id}`} key={index} className="cursor-pointer bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                             <img 
-                                src={article.featuredImage} 
+                                src={article.thumbnailImage || article.featuredImage} 
                                 alt={article.title}
                                 className="w-full h-48 object-cover"
                             />
