@@ -11,16 +11,19 @@
 @layer utilities {
   /* ===== UTILITIES */
   .contain {
-    @apply drop-shadow-md border-[1px] rounded-md p-2 w-fit border-gray-300;
+    @apply drop-shadow-md border-[1px] rounded-md md:p-2 w-fit border-gray-300;
   }
   .card-border{
-    @apply drop-shadow-md border-[1px] rounded-md mx-2  w-fit border-gray-300
+    @apply drop-shadow-md border-[1px] rounded-md md:mx-2  w-fit border-gray-300
   }
   .img{
     @apply rounded-md 
   }
   .custom-gradient{
     @apply bg-gradient-to-b from-[#dc2626] to-red-700 
+  }
+  .item{
+    @apply border-y border-[#dc2626] 
   }
 }
 

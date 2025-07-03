@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 const BreakingNews = ({articles}) => {
   const router = useRouter()
   return (
-    <div className="jsutify-self-center self-center bg-gradient-to-b custom-gradient text-white mb-8 rounded-lg overflow-hidden md:w-[100vw]">
+    <div className="jsutify-self-center self-center bg-gradient-to-b custom-gradient text-white mb-2 md:mb-8 rounded-lg overflow-hidden md:w-[100vw]">
         <div className="flex items-center px-4 py-3">
           <AlertCircle className="w-5 h-5 mr-2" />
           <div className="overflow-hidden whitespace-nowrap relative flex-1">

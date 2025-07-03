@@ -49,12 +49,12 @@ const toBanglaNumber = (num) => {
     );
   }
   return (
-    <div className="flex flex-col mx-auto px-4 pb-4 overflow-x-visible">
+    <div className="flex flex-col mx-auto px-2 md:px-4 pb-4 overflow-x-visible">
       {/* Breaking News Banner */}
      <BreakingNews articles={articles.breakingNews} />
 
 
-     <div className=" mx-auto px-4 py-4">
+     <div className=" mx-auto md:px-4 md:py-4">
      {/* Main Content Grid */}
      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
        {/* Left Main Content - Full width on mobile, 1/2 width on desktop */}
@@ -120,7 +120,7 @@ const toBanglaNumber = (num) => {
 
 {/*I just need it fixed till here the rest is okay */}
 
-              <div className='flex flex-col gap-6 mt-6'>
+              <div className='flex flex-col md:gap-6 mt-6'>
               {/* Editor's Picks Carousel */}
               <EditorsPicksCarousel articles={articles.বাংলাদেশ} />
            

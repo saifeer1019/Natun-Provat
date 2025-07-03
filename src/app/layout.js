@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-gray-50">
         <Header />
-        <main className=" px-4 min-h-screen">
+        <main className=" md:px-4 min-h-screen">
           {children}
         </main>
         <Footer />

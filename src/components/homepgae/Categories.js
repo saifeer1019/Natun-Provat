@@ -17,10 +17,10 @@ import VideoPreview from '../VideoPreview';
 };
 // Layout 1: Grid Layout with Featured Article
 const GridWithFeaturedLayout = ({ category, articles }) => (
-  <section className="mb-12 contain">
-    <div className="flex items-center justify-between mb-6 custom-gradient rounded-md p-2">
-      <h2 className="text-2xl text-white font-bold">{category}</h2>
-      <button className="flex items-center text-white hover:text-blue-700">
+  <section className="mb-12 ">
+    <div className="flex items-center justify-between mb-6 item rounded-md p-2">
+      <h2 className="text-3xl text-[#dc2626] text-lg font-bold">{category}</h2>
+      <button className="flex items-center text-[#dc2626] text-lg hover:text-blue-700">
       আরও দেখুন <ChevronRight className="w-4 h-4 ml-1" />
       </button>
     </div>
@@ -41,7 +41,7 @@ const GridWithFeaturedLayout = ({ category, articles }) => (
         </div>
           
           }
-          <h3 className="text:lg md:text-2xl font-bold hover:text-blue-600">{articles[0].title}</h3>
+          <h3 className="text:lg md:text-3xl font-bold hover:text-blue-600">{articles[0].title}</h3>
           <p className="text-gray-600 mt-2">{articles[0].excerpt}</p>
           <div className="flex items-center mt-4 text-gray-500 text-sm">
             <Clock className="w-4 h-4 mr-2" />
@@ -122,10 +122,10 @@ const EditorsPicksCarousel = ({ articles }) => {
 
   return (
     <section className="mb-12 ">
-      <div className="flex items-center justify-between mb-6 custom-gradient p-2 rounded-md">
+      <div className="flex items-center justify-between mb-6 item p-2 rounded-sm">
         <div className="flex items-center">
 
-          <h2 className="text-2xl text-white font-bold">বাংলাদেশ</h2>
+          <h2 className="text-3xl text-[#dc2626] text-lg font-bold">বাংলাদেশ</h2>
         </div>
         <div className="flex gap-2">
           <button 
@@ -187,8 +187,8 @@ const EditorsPicksCarousel = ({ articles }) => {
 const MagazineLayout = ({ category, articles }) => (
   <section className="mb-12">
     {/* Header */}
-    <div className="flex items-center justify-between mb-6 custom-gradient p-2 rounded-md text-white">
-      <h2 className="text-2xl font-bold">{category}</h2>
+    <div className="flex items-center justify-between mb-6 item p-2 rounded-sm text-[#dc2626] text-lg">
+      <h2 className="text-3xl font-bold">{category}</h2>
       <button className="flex items-center hover:text-blue-200 transition">
         আরও দেখুন <ChevronRight className="w-4 h-4 ml-1" />
       </button>
@@ -272,8 +272,8 @@ export default MagazineLayout;
 // Layout 3: Cards Layout
 const CardsLayout = ({ category, articles }) => (
   <section className="mb-12">
-    <div className="flex items-center justify-between mb-6 custom-gradient p-2 rounded-md text-white">
-      <h2 className="text-2xl font-bold">{category}</h2>
+    <div className="flex items-center justify-between mb-6 item p-2 rounded-sm text-[#dc2626] text-lg">
+      <h2 className="text-3xl font-bold">{category}</h2>
       <button className="flex items-center hover:text-blue-700">
       আরও দেখুন <ChevronRight className="w-4 h-4 ml-1" />
       </button>
