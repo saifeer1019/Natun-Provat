@@ -32,7 +32,7 @@ const Footer = () => {
         
       </div>
       <div className="text-center text-sm mt-4 border-t border-gray-700 pt-2">
-        &copy; {new Date().getFullYear()} আমাদের সংবাদ | সর্বস্বত্ব সংরক্ষিত
+        &copy; {new Date().getFullYear()} নতুন প্রভাত | সর্বস্বত্ব সংরক্ষিত
       </div>
     </footer>
   );
