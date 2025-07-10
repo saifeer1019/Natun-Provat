@@ -3,8 +3,8 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-6">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
         <div>
-          <h2 className="text-xl font-bold">📰 আমাদের সংবাদ</h2>
-          <p className="text-sm">সত্য ও নির্ভরযোগ্য সংবাদের প্রতিশ্রুতি</p>
+          <h2 className="text-xl font-bold">নতুন প্রভাত</h2>
+          <p className="text-sm">নির্ভীক সত্যের দৈনিক প্রতিশ্রুতি</p>
           <a
           href="https://admin.natunprovat.com"
           target="_blank"
